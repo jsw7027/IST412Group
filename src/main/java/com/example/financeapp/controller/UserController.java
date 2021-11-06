@@ -4,10 +4,13 @@ import com.example.financeapp.model.User;
 import com.example.financeapp.repository.UserRepository;
 import com.example.financeapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -27,11 +30,16 @@ public class UserController {
         return "index";
     }
 
+    @GetMapping("/EmployeeScreen")
+    public String showEmployeeScreen(Model model){
+        User user = new User();
+        model.addAttribute("user",user);
+        return "EmployeeScreen";
+    }
 
-    @PostMapping("/login2")
-    @ResponseBody
-    public String login2(@ModelAttribute("user")User user) {
-        System.out.println("asfad");
+
+    @GetMapping ("/login2")
+    public String login2(@ModelAttribute("user")User user, Model model) {
         Optional<User> optional = userService.getUserById(user.getUserId());
         String result =" ";
         User foundUser = null;
@@ -39,30 +47,73 @@ public class UserController {
             foundUser = optional.get();
             if (foundUser.getUserId().equals(user.getUserId())) {
                 if(foundUser.getUserPw().equals(user.getUserPw())){
-                    result="Login Success";
-                }else{
-                    result= "wrong password";
+                    if(foundUser.getUserType().equals("Employee") | foundUser.getUserType().equals("Employee") ){
+                        result = "EmployeeScreen";
+                    }
+                    else{ result="CustomerScreen"; }
+                }
+                else{
+                    result= "index";
                 }
             }
         }else{
-            result = "Wrong User";
+            result = "index";
         }
         return result;
     }
 
     @GetMapping("/showNewUserForm")
-    public String showNewStudentForm(Model model){
+    public String showNewUserForm(Model model){
         User user = new User();
         model.addAttribute("user", user);
         return "SignUp";
     }
 
+    @GetMapping("/showLoaneeData")
+    public String showLoaneeData(Model model){
+        List<User> userList = userService.getAllUsers();
+        ArrayList<User> customers = new ArrayList<User>();
+        for(int i=0; i<userList.size();i++){
+            if(userList.get(i).getUserType().equals("customer")){
+                customers.add(userList.get(i));
+            }
+        }
+        model.addAttribute("customerList", customers);
+
+        return "LoaneeDataView";
+    }
+
 
     @PostMapping("/signUp")
-    @ResponseBody
     public String signUp(@ModelAttribute("user")User user) {
         userService.saveUser(user);
         return"redirect:/";
+    }
+
+
+    @GetMapping("/page/{pageNo}")
+    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
+                                @RequestParam("sortField") String sortField,
+                                @RequestParam("sortDir") String sortDir,
+                                Model model){
+        int pageSize = 5;
+
+        Page<User> page = userService.findPaginated(pageNo, pageSize, sortField,sortDir);
+        List<User> listUsers = page.getContent();
+
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPage", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reserveSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+        model.addAttribute("listUsers", listUsers);
+
+        return "index";
+
+
     }
 
 

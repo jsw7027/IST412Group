@@ -9,7 +9,7 @@
 <h1> Welcome to our Application</h1><br/>
 
 <form action="#" th:action="@{/login2}" th:object="${user}"
-      method="POST">
+      method="GET">
 
     <input type="text" th:field="*{userId}"
            placeholder="User Id" class="form-control mb-4 col-4">

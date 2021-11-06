@@ -36,6 +36,8 @@ public class UserServiceImpt implements UserService {
         return optional;
     }
 
+
+
     @Override
     public void deleteUserById(String id) {
         this.userRepository.deleteById(id);
