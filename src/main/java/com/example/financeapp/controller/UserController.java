@@ -17,6 +17,7 @@ import java.util.Optional;
 @Controller
 public class UserController {
 
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -37,6 +38,22 @@ public class UserController {
         return "EmployeeScreen";
     }
 
+    @GetMapping("/CustomerScreen")
+    public String showCustomerScreen(Model model){
+        User user = new User();
+        model.addAttribute("user",user);
+        return "CustomerScreen";
+    }
+
+    @GetMapping("/CustomerScreen{id}")
+    public String updatedCustomerScreen(@PathVariable (value="id")String id, Model model){
+        User user = new User();
+        model.addAttribute("user",user);
+        model.addAttribute("id",id);
+        return "CustomerScreen";
+    }
+
+
 
     @GetMapping ("/login2")
     public String login2(@ModelAttribute("user")User user, Model model) {
@@ -50,7 +67,9 @@ public class UserController {
                     if(foundUser.getUserType().equals("Employee") | foundUser.getUserType().equals("Employee") ){
                         result = "EmployeeScreen";
                     }
-                    else{ result="CustomerScreen"; }
+                    else{
+                        model.addAttribute("user", user);
+                        result="CustomerScreen"; }
                 }
                 else{
                     result= "index";

@@ -14,12 +14,20 @@ public class LoanApplication {
     private String loanType;
     @Column(name="customerId")
     private String customerId;
+    @Column(name="customerCredit")
+    private String customerCredit;
     @Column(name="amount")
     private int loanAmount;
     @Column(name="status")
     private String status;
 
+    public String getCustomerCredit() {
+        return customerCredit;
+    }
 
+    public void setCustomerCredit(String customerCredit) {
+        this.customerCredit = customerCredit;
+    }
 
     public long getId() {
         return id;

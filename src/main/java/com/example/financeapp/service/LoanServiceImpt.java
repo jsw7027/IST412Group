@@ -40,6 +40,7 @@ public class LoanServiceImpt implements LoanService{
         return loanApplication;
     }
 
+
     @Override
     public void deleteLoanById(long id) {
         this.loanRepository.deleteById(id);

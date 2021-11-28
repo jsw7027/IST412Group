@@ -10,13 +10,14 @@
     <hr>
     <h2>Update Loan</h2>
 
-    <form action="#" th:action="@{/saveLoan}" th:object="${loan}"
+    <form action="#" th:action="@{/updateLoan}" th:object="${loan}"
           method="POST">
         <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
         <input type="hidden" th:field="*{customerId}"/>
         <input type="hidden" th:field="*{loanType}"/>
         <input type="hidden" th:field="*{loanAmount}" />
+        <input type="hidden" th:field="*{customerCredit}" />
         <input type="text" th:field="*{status}" class="form-control mb-4 col-4">
 
         <button type="submit" class="btn btn-info col-2"> Update Loan</button>
