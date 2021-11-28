@@ -1,3 +1,10 @@
+/**
+ * COPYRIGHT (C) 2021 Group 4: David Hernandez, Jennifer Lewis, Seung Jung, Daniel O'Donnell. All Rights Reserved.
+ * Group Project M04-A03
+ *
+ * @author Seung Jung
+ * @version 1.01 2021-11-27
+ */
 package com.example.financeapp.model;
 
 import javax.persistence.*;
@@ -7,10 +14,11 @@ import java.util.Set;
 
 @Entity
 @Table(name="users")
+//Stores data for users
 public class User implements Serializable {
 
 
-
+    //attributes and encapsulation with reference to columns for the table
     @Id
     @Column(name="userId")
     private String userId;
@@ -21,7 +29,7 @@ public class User implements Serializable {
     @Column(name="userType")
     private String userType;
 
-
+    //Getters and Setters
     public String getUserName() {
         return userName;
     }

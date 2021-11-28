@@ -1,3 +1,10 @@
+/**
+ * COPYRIGHT (C) 2021 Group 4: David Hernandez, Jennifer Lewis, Seung Jung, Daniel O'Donnell. All Rights Reserved.
+ * Group Project M04-A03
+ *
+ * @author Seung Jung
+ * @version 1.01 2021-11-27
+ */
 package com.example.financeapp.controller;
 
 import com.example.financeapp.model.User;
@@ -15,14 +22,16 @@ import java.util.Map;
 import java.util.Optional;
 
 @Controller
+//UserController class handles switching and loading menu screens for the user to navigate through
 public class UserController {
 
-
+    //Handles accessibility to other classes
     @Autowired
     private UserService userService;
     @Autowired
     private UserRepository userRepository;
 
+    //Enables user to view home page
     @GetMapping("/")
     public String viewHomePage(Model model){
         User user = new User();
@@ -31,6 +40,7 @@ public class UserController {
         return "index";
     }
 
+    //Enables the user to view the employee screen
     @GetMapping("/EmployeeScreen")
     public String showEmployeeScreen(Model model){
         User user = new User();
@@ -40,14 +50,14 @@ public class UserController {
 
 
 
-
+    //Enables the user to view the customer screen
     @GetMapping("/CustomerScreen")
     public String showCustomerScreen(@ModelAttribute("user")User user, Model model){
         model.addAttribute("user",user);
         return "CustomerScreen";
     }
 
-
+    //Handles the login and authentication
     @GetMapping ("/login2")
     public String login2(@ModelAttribute("user")User user, Model model) {
         Optional<User> optional = userService.getUserById(user.getUserId());
@@ -74,6 +84,7 @@ public class UserController {
         return result;
     }
 
+    //Displays a new user form
     @GetMapping("/showNewUserForm")
     public String showNewUserForm(Model model){
         User user = new User();
@@ -81,6 +92,7 @@ public class UserController {
         return "SignUp";
     }
 
+    //Displays loanee data as a list
     @GetMapping("/showLoaneeData")
     public String showLoaneeData(Model model){
         List<User> userList = userService.getAllUsers();
@@ -95,14 +107,14 @@ public class UserController {
         return "LoaneeDataView";
     }
 
-
+    //Enables the user to save their signup info
     @PostMapping("/signUp")
     public String signUp(@ModelAttribute("user")User user) {
         userService.saveUser(user);
         return"redirect:/";
     }
 
-
+    //Handles finding the user data in a list and sorts it.
     @GetMapping("/page/{pageNo}")
     public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
                                 @RequestParam("sortField") String sortField,
