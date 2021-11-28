@@ -17,6 +17,7 @@ import java.util.Optional;
 @Controller
 public class UserController {
 
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -38,6 +39,15 @@ public class UserController {
     }
 
 
+
+
+    @GetMapping("/CustomerScreen")
+    public String showCustomerScreen(@ModelAttribute("user")User user, Model model){
+        model.addAttribute("user",user);
+        return "CustomerScreen";
+    }
+
+
     @GetMapping ("/login2")
     public String login2(@ModelAttribute("user")User user, Model model) {
         Optional<User> optional = userService.getUserById(user.getUserId());
@@ -50,7 +60,9 @@ public class UserController {
                     if(foundUser.getUserType().equals("Employee") | foundUser.getUserType().equals("Employee") ){
                         result = "EmployeeScreen";
                     }
-                    else{ result="CustomerScreen"; }
+                    else{
+                        model.addAttribute("user", user);
+                        result="CustomerScreen"; }
                 }
                 else{
                     result= "index";
