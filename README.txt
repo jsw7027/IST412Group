@@ -1,5 +1,5 @@
 1.  (Seung Jung / Daniel O'Donnell) Issue: The model class "customer" is empty and does not do anything.
-    Solution:
+    Solution: Created attribute data with getters and setters for customers.
 
 2.  (Daniel O'Donnell) Issue: The model class "Employee" is empty and does not do anything.
     Solution: The Employee class was revised to include attributes with encapsulation that includes getters/setters.
@@ -8,10 +8,10 @@
     Solution:
 
 4.  (Daniel O'Donnell) Issue: There are no comments in the code
-    Solution:
+    Solution: Added comments in all classes and included a main heading.
 
 5.  (Daniel O'Donnell) Issue: The model class "LoanApplication" lacks logical statements to retrieve various loan app types.
-    Solution:
+    Solution: method retrieveLoanAppType() was added with logical statemenets to handle switching between loan application types.
 
 6.  (David Hernandez) Issue: The service class "LoanServiceImpt" has many methods.
     Solution:
