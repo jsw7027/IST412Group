@@ -18,9 +18,13 @@ This change was made in order to reduce the size of UserController to make the c
 
 6.  (David Hernandez) Issue: The service class "LoanServiceImpt" has many methods.
     Solution:
+    Because the class "LoanServiceImpt" is based on the interface "LoanService", creating a separate class would cause errors.
+    Some methods in the class rely on previous methods to work, so splitting them apart would cause the software to not work since they are connected by an interface.
 
 7.  (David Hernandez) Issue: The service class "UserServiceImpl" has many methods.
     Solution:
+    Because the class "UserServiceImpl" is based on the interface "UserService", creating a separate class would cause errors.
+    Some methods in the class rely on previous methods to work, so splitting them apart would cause the software to not work since they are connected by an interface.
 
 8.  (Seung Jung) Issue: The html code for Customer Screen does not do anything productive except display a title page but no content.
     Solution:
