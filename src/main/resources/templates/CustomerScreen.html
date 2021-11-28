@@ -16,7 +16,7 @@ Welcome to our app
         <tr th:each="user : ${user}">
         <td th:text="${user.userId}"></td>
         <td>
-            <a th:href="@{/showLoanForm}" class="btn btn-primary">Wirte Application</a>
+            <a th:href="@{/showLoanForm/{id}(id=${user.userId})}" class="btn btn-primary">Wirte Application</a>
             <a th:href="@{/myLoan/{id}(id=${user.userId})}"  class="btn btn-primary">View My Loan</a>
         </td>
     </tr>

@@ -32,7 +32,7 @@ public class LoanController {
     }
 
     @GetMapping ("/myLoan/{id}")
-    public String viewMyLoan(@PathVariable (value="id")String id, Model model) {
+    public String viewMyLoan(@PathVariable (value="id")String id, @ModelAttribute("user")User user ,Model model) {
         List<LoanApplication> all = loanService.getAllLoan();
         List<LoanApplication> myList = new ArrayList<>();
         for(int i=0; i<all.size(); i++){
@@ -41,6 +41,8 @@ public class LoanController {
             }
         }
         System.out.println(id);
+        user.setUserId(id);
+        System.out.println(user.getUserId());
         model.addAttribute("myList", myList);
         return "myLoanList";
     }
@@ -53,7 +55,7 @@ public class LoanController {
     }
 
     @PostMapping("/saveLoan")
-    public String saveLoan(@ModelAttribute("loan") LoanApplication loanApplication){
+    public String saveLoan(@ModelAttribute("loan") LoanApplication loanApplication, Model model){
         int credit = Integer.parseInt(loanApplication.getCustomerCredit());
         if(credit<5){
             loanApplication.setStatus("denied(lowCredit)");
@@ -64,7 +66,8 @@ public class LoanController {
         }
 
         loanService.saveLoan(loanApplication);
-        return"redirect:/CustomerScreen";
+        model.addAttribute("loan",loanApplication);
+        return"redirect:/showLoanForm";
     }
 
     @PostMapping("/updateLoan")
@@ -73,16 +76,18 @@ public class LoanController {
         return"redirect:/loanList";
     }
 
-    @GetMapping("/showLoanForm")
-    public String showNewUserForm(Model model){
+    @GetMapping("/showLoanForm/{id}")
+    public String showNewLoanForm(@PathVariable (value="id") String id, @ModelAttribute("user")User user ,Model model){
         LoanApplication la = new LoanApplication();
-        model.addAttribute("la", la);
+        model.addAttribute("loan", la);
+        la.setCustomerId(id);
+        user.setUserId(id);
         return "WriteLoan";
     }
 
 
     @GetMapping("/statusUpdateView/{id}")
-    public String statusUpdateView(@PathVariable (value="id") long id, Model model){
+    public String statusUpdateView(@PathVariable (value="id") long id,Model model){
         LoanApplication loanApplication = loanService.getLoanById(id);
         model.addAttribute("loan", loanApplication);
         return "update_loan";

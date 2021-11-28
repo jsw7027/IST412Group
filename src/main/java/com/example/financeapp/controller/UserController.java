@@ -38,21 +38,14 @@ public class UserController {
         return "EmployeeScreen";
     }
 
+
+
+
     @GetMapping("/CustomerScreen")
-    public String showCustomerScreen(Model model){
-        User user = new User();
+    public String showCustomerScreen(@ModelAttribute("user")User user, Model model){
         model.addAttribute("user",user);
         return "CustomerScreen";
     }
-
-    @GetMapping("/CustomerScreen{id}")
-    public String updatedCustomerScreen(@PathVariable (value="id")String id, Model model){
-        User user = new User();
-        model.addAttribute("user",user);
-        model.addAttribute("id",id);
-        return "CustomerScreen";
-    }
-
 
 
     @GetMapping ("/login2")

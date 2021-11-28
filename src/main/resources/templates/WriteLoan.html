@@ -8,16 +8,26 @@
 </head>
 <body>
 
-<form action="#" th:action="@{/saveLoan/}" th:object="${la}"
+<form action="#" th:action="@{/saveLoan}" th:object="${loan}"
       method="POST">
-    <!-- Add hidden form field to handle update -->j
-    <input type="text" th:field="*{customerId}" placeholder="type ID" class="form-control mb-4 col-4"/>
-    <input type="text" th:field="*{loanType}" placeholder="type loanType" class="form-control mb-4 col-4"/>
-    <input type="text" th:field="*{loanAmount}" placeholder="type loanAmount" class="form-control mb-4 col-4"/>
-    <input type="text" th:field="*{customerCredit}" placeholder="type your Credit Level" class="form-control mb-4 col-4" />
+    <!-- Add hidden form field to handle update -->
+    id:  <input type="text" th:field="*{customerId}" placeholder="type ID" class="form-control mb-4 col-4" disabled/>
+    Type:  <input type="text" th:field="*{loanType}" placeholder="type loanType" class="form-control mb-4 col-4"/>
+    Amount:  <input type="text" th:field="*{loanAmount}" placeholder="type loanAmount" class="form-control mb-4 col-4"/>
+    Credit:  <input type="text" th:field="*{customerCredit}" placeholder="type your Credit Level" class="form-control mb-4 col-4" />
     <input type="hidden" th:field="*{status}" class="form-control mb-4 col-4">
 
     <button type="submit" class="btn btn-info col-2"> Send Loan</button>
+</form><br><br>
+<form action="#" th:action="@{/CustomerScreen}" th:object="${user}"
+      method="GET">
+
+    <input type="hidden" th:field="*{userId}"
+           placeholder="User Id" class="form-control mb-4 col-4">
+
+
+    <button type="submit" class="btn btn-info col-2"> Back</button><br>
+
 </form>
 
 </body>
