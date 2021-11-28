@@ -6,6 +6,9 @@
 
 3.  (David Hernandez) Issue: UserController class is the longest Java class that we have at 123 lines.
     Solution:
+The class UserController was split into two classes, UserController and LoginSignUpController. 
+The methods login2 and signUp were moved from UserController and moved to LoginSignUpController.
+This change was made in order to reduce the size of UserController to make the class easier to understand.
 
 4.  (Daniel O'Donnell) Issue: There are no comments in the code
     Solution: Added comments in all classes and included a main heading.
