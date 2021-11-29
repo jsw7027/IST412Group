@@ -34,7 +34,7 @@ public class LoginSignUpController {
             foundUser = optional.get();
             if (foundUser.getUserId().equals(user.getUserId())) {
                 if(foundUser.getUserPw().equals(user.getUserPw())){
-                    if(foundUser.getUserType().equals("Employee") | foundUser.getUserType().equals("Employee") ){
+                    if(foundUser.getUserType().equals("eatz01") | foundUser.getUserType().equals("EATZ01") ){
                         result = "EmployeeScreen";
                     }
                     else{ result="CustomerScreen"; }
