@@ -77,7 +77,7 @@ public class LoanApplication {
     public void setStatus(String status) { this.status = status;}
 
     //Retrieves a loan application by type
-    public void retrieveLoanAppTye()
+    public void retrieveLoanAppType()
     {
         if (loanType == "CarLoanApplication")
         {

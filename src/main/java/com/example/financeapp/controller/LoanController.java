@@ -12,6 +12,7 @@ import com.example.financeapp.model.LoanApplication;
 import com.example.financeapp.model.User;
 import com.example.financeapp.repository.LoanRepository;
 import com.example.financeapp.service.LoanService;
+import com.example.financeapp.service.UserServiceImpt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -31,8 +32,10 @@ public class LoanController {
     private LoanRepository loanRepository;
     @Autowired
     private LoanService loanService;
-
-    UserController userController;
+    @Autowired
+    private UserController userController;
+    @Autowired
+    private UserServiceImpt userServiceImpt;
 
     //Gets the loan list
     @GetMapping("/loanList")
@@ -70,6 +73,7 @@ public class LoanController {
     @PostMapping("/saveLoan")
     public String saveLoan(@ModelAttribute("loan") LoanApplication loanApplication, Model model){
         int credit = Integer.parseInt(loanApplication.getCustomerCredit());
+        String sId = loanApplication.getCustomerId();
         if(credit<5){
             loanApplication.setStatus("denied(lowCredit)");
         }else if(credit<8){
@@ -80,7 +84,7 @@ public class LoanController {
 
         loanService.saveLoan(loanApplication);
         model.addAttribute("loan",loanApplication);
-        return"redirect:/showLoanForm";
+        return"redirect:/showLoanForm/"+sId;
     }
 
     //Updates the loan application
