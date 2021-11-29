@@ -34,7 +34,7 @@ This change was made in order to reduce the size of UserController to make the c
     Solution:
 
 9.  (Jennifer Lewis) Issue: Easy to have access to Employee dashboard.
-    Solution:
+    Solution: Changed the employee key so that it's less generic and easily detectable.
 
 10. (Jennifer Lewis) Issue: Employee dashboard doesn't display the "customers" that have signed up.
     Solution: Added HTTP GET Requests to save and retrieve customer/loanee data to the employee data screen. 
