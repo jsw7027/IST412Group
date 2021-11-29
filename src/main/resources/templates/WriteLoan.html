@@ -11,7 +11,7 @@
 <form action="#" th:action="@{/saveLoan}" th:object="${loan}"
       method="POST">
     <!-- Add hidden form field to handle update -->
-    id:  <input type="text" th:field="*{customerId}" placeholder="type ID" class="form-control mb-4 col-4" disabled/>
+    id:  <input type="text" th:field="*{customerId}" placeholder="type ID" class="form-control mb-4 col-4" />
     Type:  <input type="text" th:field="*{loanType}" placeholder="type loanType" class="form-control mb-4 col-4"/>
     Amount:  <input type="text" th:field="*{loanAmount}" placeholder="type loanAmount" class="form-control mb-4 col-4"/>
     Credit:  <input type="text" th:field="*{customerCredit}" placeholder="type your Credit Level" class="form-control mb-4 col-4" />

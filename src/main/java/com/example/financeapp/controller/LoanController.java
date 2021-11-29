@@ -36,13 +36,12 @@ public class LoanController {
         List<LoanApplication> all = loanService.getAllLoan();
         List<LoanApplication> myList = new ArrayList<>();
         for(int i=0; i<all.size(); i++){
+            System.out.println(all.get(i).getCustomerId());
             if(all.get(i).getCustomerId().equals(id)){
                 myList.add(all.get(i));
             }
         }
-        System.out.println(id);
         user.setUserId(id);
-        System.out.println(user.getUserId());
         model.addAttribute("myList", myList);
         return "myLoanList";
     }
@@ -57,6 +56,7 @@ public class LoanController {
     @PostMapping("/saveLoan")
     public String saveLoan(@ModelAttribute("loan") LoanApplication loanApplication, Model model){
         int credit = Integer.parseInt(loanApplication.getCustomerCredit());
+        String sId = loanApplication.getCustomerId();
         if(credit<5){
             loanApplication.setStatus("denied(lowCredit)");
         }else if(credit<8){
@@ -64,10 +64,9 @@ public class LoanController {
         }else{
             loanApplication.setStatus("Approved");
         }
-
         loanService.saveLoan(loanApplication);
         model.addAttribute("loan",loanApplication);
-        return"redirect:/showLoanForm";
+        return"redirect:/showLoanForm/"+sId;
     }
 
     @PostMapping("/updateLoan")
