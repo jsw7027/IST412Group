@@ -33,4 +33,4 @@ This change was made in order to reduce the size of UserController to make the c
     Solution:
 
 10. (Jennifer Lewis) Issue: Employee dashboard doesn't display the "customers" that have signed up.
-    Solution:
+    Solution: Added HTTP GET Requests to save and retrieve customer/loanee data to the employee data screen. 
