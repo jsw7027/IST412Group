@@ -77,7 +77,46 @@ public class UserController {
 
         return "LoaneeDataView";
     }
+ @GetMapping("/showNewUserForm")
+    public String showNewUserForm(Model model){
+        User user = new User();
+        model.addAttribute("user", user);
+        return "SignUp";
+    }
+    @GetMapping("/userList")
+    public String viewUserPage(Model model) {
+        model.addAttribute("listUser", userService.getAllUsers());
+        return "user_list";
+    }
+    @GetMapping("/showLoaneeData")
+    public String showLoaneeData(Model model){
+        List<User> userList = userService.getAllUsers();
+        ArrayList<User> customers = new ArrayList<User>();
+        for(int i=0; i<userList.size();i++){
+            if(userList.get(i).getUserType().equals("customer")){
+                customers.add(userList.get(i));
+            }
+        }
+        model.addAttribute("customerList", customers);
 
+        return "LoaneeDataView";
+    }
+//save customer accounts
+    @PostMapping("/saveUser")
+    public String saveUser(@ModelAttribute("user") User user){
+        userService.saveUser(user);
+        return "redirect:/user_list";
+    }
+    
+    //update list of customer accounts
+    @GetMapping("/showFormForUpdate/{id}")
+    public String showFormForUpdate(@PathVariable(value="id") String id, Model model) {
+        Optional<User> user  = userService.getUserById(id);
+        List<User> allUsers = userService.getAllUsers();
+        model.addAttribute("allUsers", allUsers);
+        model.addAttribute("user", user);
+        return "update_user";
+    }
     //Handles finding the user data in a list and sorts it.
     @GetMapping("/page/{pageNo}")
     public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
