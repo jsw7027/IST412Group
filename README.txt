@@ -31,7 +31,7 @@ This change was made in order to reduce the size of UserController to make the c
     Even if we made separate the interfaces, it would cause trouble for the classes since their methods would try to find what does not exist in their interface and class.
 
 8.  (Seung Jung) Issue: The html code for Customer Screen does not do anything productive except display a title page but no content.
-    Solution:
+    Solution: The customer screen now shows "Welcome to our app", the customer's ID, and two buttons, "Write Application" and "View My Loan"
 
 9.  (Jennifer Lewis) Issue: Easy to have access to Employee dashboard.
     Solution: Changed the employee signup string to one that's less generic and easily detectable. 
