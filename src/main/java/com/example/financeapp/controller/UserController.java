@@ -7,6 +7,8 @@
  */
 package com.example.financeapp.controller;
 
+import com.example.financeapp.model.Investment;
+import com.example.financeapp.model.LoanApplication;
 import com.example.financeapp.model.User;
 import com.example.financeapp.repository.UserRepository;
 import com.example.financeapp.service.UserService;

@@ -37,6 +37,9 @@ public class LoginSignUpController {
                     if(foundUser.getUserType().equals("Employee") | foundUser.getUserType().equals("Employee") ){
                         result = "EmployeeScreen";
                     }
+                    else if(foundUser.getUserType().equals("Investor")){
+                        result = "InvestorScreen";
+                    }
                     else{ result="CustomerScreen"; }
                 }
                 else{
