@@ -7,14 +7,9 @@
 </head>
 <body>
 Investment
-<!--
-Something below is broken
 
-<table border="0" class ="table table-striped table-responsive-md">
 
-    <tbody>
-
-    <form action="#" th:action="@{/saveInvestment}" th:object="${investment}"
+<form action="#" th:action="@{/saveInvestment}" th:object="${investment}"
           method="POST">
 
         id:  <input type="text" th:field="*{investorId}" placeholder="type ID" class="form-control mb-4 col-4"/>
@@ -22,21 +17,11 @@ Something below is broken
 
 
         <button type="submit" class="btn btn-info col-2"> Send Loan</button>
-    </form><br><br>
+</form><br><br>
 
-    <form action="#" th:action="@{/InvestorScreen}" th:object="${user}"
-          method="GET">
+<a th:href="@{/InvestorScreen}" class="btn btn-primary">Back</a>
 
-        <input type="hidden" th:field="*{userId}"
-               placeholder="User Id" class="form-control mb-4 col-4">
-
-
-        <button type="submit" class="btn btn-info col-2"> Back</button><br>
-
-    </form>
-    </tbody>
-</table>
--->
+</form>
 
 </body>
 </html>
