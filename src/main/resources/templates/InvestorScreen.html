@@ -9,7 +9,17 @@
 Investor
 <table border="0" class ="table table-striped table-responsive-md">
 
-    <a th:href="@{/InvestmentView}" class="btn btn-primary">Enter Investment</a>
+
+
+    <tbody>
+    <tr>
+    <tr th:each="user : ${user}">
+        <td th:text="${user.userId}"></td>
+        <td>
+            <a th:href="@{/InvestmentView/{id}(id=${user.userId})}" class="btn btn-primary">Enter Investment</a>
+        </td>
+    </tr>
+    </tr>
 
 
 </table>

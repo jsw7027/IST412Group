@@ -16,10 +16,17 @@ Investment
         Type:  <input type="text" th:field="*{amount}" placeholder="Amount" class="form-control mb-4 col-4"/>
 
 
-        <button type="submit" class="btn btn-info col-2"> Send Loan</button>
+        <button type="submit" class="btn btn-info col-2"> Enter Investment</button>
 </form><br><br>
 
-<a th:href="@{/InvestorScreen}" class="btn btn-primary">Back</a>
+<form action="#" th:action="@{/InvestorScreen}" th:object="${user}"
+      method="GET">
+
+    <input type="hidden" th:field="*{userId}"
+           placeholder="User Id" class="form-control mb-4 col-4">
+
+
+    <button type="submit" class="btn btn-info col-2"> Back</button><br>
 
 </form>
 
