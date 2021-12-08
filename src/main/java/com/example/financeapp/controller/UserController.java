@@ -1,5 +1,14 @@
+/**
+ * COPYRIGHT (C) 2021 Group 4: David Hernandez, Jennifer Lewis, Seung Jung, Daniel O'Donnell. All Rights Reserved.
+ * Group Project M04-A03
+ *
+ * @author Seung Jung
+ * @version 1.01 2021-11-27
+ */
 package com.example.financeapp.controller;
 
+import com.example.financeapp.model.Investment;
+import com.example.financeapp.model.LoanApplication;
 import com.example.financeapp.model.User;
 import com.example.financeapp.repository.UserRepository;
 import com.example.financeapp.service.UserService;
@@ -15,14 +24,16 @@ import java.util.Map;
 import java.util.Optional;
 
 @Controller
+//UserController class handles switching and loading menu screens for the user to navigate through
 public class UserController {
 
-
+    //Handles accessibility to other classes
     @Autowired
     private UserService userService;
     @Autowired
     private UserRepository userRepository;
 
+    //Enables user to view home page
     @GetMapping("/")
     public String viewHomePage(Model model){
         User user = new User();
@@ -31,6 +42,7 @@ public class UserController {
         return "index";
     }
 
+    //Enables the user to view the employee screen
     @GetMapping("/EmployeeScreen")
     public String showEmployeeScreen(Model model){
         User user = new User();
@@ -38,42 +50,14 @@ public class UserController {
         return "EmployeeScreen";
     }
 
-
-
-
+    //Enables the user to view the customer screen
     @GetMapping("/CustomerScreen")
     public String showCustomerScreen(@ModelAttribute("user")User user, Model model){
         model.addAttribute("user",user);
         return "CustomerScreen";
     }
 
-
-    @GetMapping ("/login2")
-    public String login2(@ModelAttribute("user")User user, Model model) {
-        Optional<User> optional = userService.getUserById(user.getUserId());
-        String result =" ";
-        User foundUser = null;
-        if(optional.isPresent()){
-            foundUser = optional.get();
-            if (foundUser.getUserId().equals(user.getUserId())) {
-                if(foundUser.getUserPw().equals(user.getUserPw())){
-                    if(foundUser.getUserType().equals("Employee") | foundUser.getUserType().equals("Employee") ){
-                        result = "EmployeeScreen";
-                    }
-                    else{
-                        model.addAttribute("user", user);
-                        result="CustomerScreen"; }
-                }
-                else{
-                    result= "index";
-                }
-            }
-        }else{
-            result = "index";
-        }
-        return result;
-    }
-
+    //Displays a new user form
     @GetMapping("/showNewUserForm")
     public String showNewUserForm(Model model){
         User user = new User();
@@ -81,6 +65,7 @@ public class UserController {
         return "SignUp";
     }
 
+    //Displays loanee data as a list
     @GetMapping("/showLoaneeData")
     public String showLoaneeData(Model model){
         List<User> userList = userService.getAllUsers();
@@ -95,14 +80,29 @@ public class UserController {
         return "LoaneeDataView";
     }
 
-
-    @PostMapping("/signUp")
-    public String signUp(@ModelAttribute("user")User user) {
-        userService.saveUser(user);
-        return"redirect:/";
+    @GetMapping("/userList")
+    public String viewUserPage(Model model) {
+        model.addAttribute("listUser", userService.getAllUsers());
+        return "user_list";
     }
 
-
+//save customer accounts
+    @PostMapping("/saveUser")
+    public String saveUser(@ModelAttribute("user") User user){
+        userService.saveUser(user);
+        return "redirect:/user_list";
+    }
+    
+    //update list of customer accounts
+    @GetMapping("/showFormForUpdate/{id}")
+    public String showFormForUpdate(@PathVariable(value="id") String id, Model model) {
+        Optional<User> user  = userService.getUserById(id);
+        List<User> allUsers = userService.getAllUsers();
+        model.addAttribute("allUsers", allUsers);
+        model.addAttribute("user", user);
+        return "update_user";
+    }
+    //Handles finding the user data in a list and sorts it.
     @GetMapping("/page/{pageNo}")
     public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
                                 @RequestParam("sortField") String sortField,
@@ -127,8 +127,5 @@ public class UserController {
 
 
     }
-
-
-
 
 }

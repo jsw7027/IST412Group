@@ -1,3 +1,10 @@
+/**
+ * COPYRIGHT (C) 2021 Group 4: David Hernandez, Jennifer Lewis, Seung Jung, Daniel O'Donnell. All Rights Reserved.
+ * Group Project M04-A03
+ *
+ * @author Seung Jung
+ * @version 1.01 2021-11-27
+ */
 package com.example.financeapp.controller;
 
 
@@ -5,6 +12,7 @@ import com.example.financeapp.model.LoanApplication;
 import com.example.financeapp.model.User;
 import com.example.financeapp.repository.LoanRepository;
 import com.example.financeapp.service.LoanService;
+import com.example.financeapp.service.UserServiceImpt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -16,21 +24,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+//LoanController class handles switching and loading loan screens
 public class LoanController {
 
+    //Handles accessibility to other classes
     @Autowired
     private LoanRepository loanRepository;
     @Autowired
     private LoanService loanService;
+    @Autowired
+    private UserController userController;
+    @Autowired
+    private UserServiceImpt userServiceImpt;
 
-    UserController userController;
-
+    //Gets the loan list
     @GetMapping("/loanList")
     public String viewLoanPage(Model model){
         model.addAttribute("listLoans", loanService.getAllLoan());
         return "LoanAppView";
     }
 
+    //Enables getting and viewing a list my loans
     @GetMapping ("/myLoan/{id}")
     public String viewMyLoan(@PathVariable (value="id")String id, @ModelAttribute("user")User user ,Model model) {
         List<LoanApplication> all = loanService.getAllLoan();
@@ -46,6 +60,7 @@ public class LoanController {
         return "myLoanList";
     }
 
+    //Loads a new application
     @GetMapping("/ViewUploadApplication")
     public String viewUploadApplication(Model model){
         LoanApplication loanApplication = new LoanApplication();
@@ -53,6 +68,7 @@ public class LoanController {
         return "new_Loan";
     }
 
+    //Saves a loan and logic determines approval
     @PostMapping("/saveLoan")
     public String saveLoan(@ModelAttribute("loan") LoanApplication loanApplication, Model model){
         int credit = Integer.parseInt(loanApplication.getCustomerCredit());
@@ -69,12 +85,14 @@ public class LoanController {
         return"redirect:/showLoanForm/"+sId;
     }
 
+    //Updates the loan application
     @PostMapping("/updateLoan")
     public String updateLoan(@ModelAttribute("loan") LoanApplication loanApplication){
         loanService.saveLoan(loanApplication);
         return"redirect:/loanList";
     }
 
+    //Displays a new loan form
     @GetMapping("/showLoanForm/{id}")
     public String showNewLoanForm(@PathVariable (value="id") String id, @ModelAttribute("user")User user ,Model model){
         LoanApplication la = new LoanApplication();
@@ -84,7 +102,7 @@ public class LoanController {
         return "WriteLoan";
     }
 
-
+    //provides a status update view for the loan application
     @GetMapping("/statusUpdateView/{id}")
     public String statusUpdateView(@PathVariable (value="id") long id,Model model){
         LoanApplication loanApplication = loanService.getLoanById(id);

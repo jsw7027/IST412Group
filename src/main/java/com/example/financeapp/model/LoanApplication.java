@@ -1,3 +1,10 @@
+/**
+ * COPYRIGHT (C) 2021 Group 4: David Hernandez, Jennifer Lewis, Seung Jung, Daniel O'Donnell. All Rights Reserved.
+ * Group Project M04-A03
+ *
+ * @author Daniel O'Donnell
+ * @version 1.01 2021-11-27
+ */
 package com.example.financeapp.model;
 
 
@@ -5,8 +12,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="loanApplication")
+//Employee class handles creating a table and columns to manage data for loan applications
 public class LoanApplication {
 
+    //attributes and encapsulation with reference to columns for the table
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -21,6 +30,7 @@ public class LoanApplication {
     @Column(name="status")
     private String status;
 
+    //Getters and Setters
     public String getCustomerCredit() {
         return customerCredit;
     }
@@ -61,7 +71,38 @@ public class LoanApplication {
         this.loanAmount = loanAmount;
     }
 
+    //Get status of loan application
     public String getStatus() { return status; }
 
     public void setStatus(String status) { this.status = status;}
+
+    //Retrieves a loan application by type
+    public void retrieveLoanAppType()
+    {
+        if (loanType == "CarLoanApplication")
+        {
+            //debug
+            System.out.println("CarLoanApplication was retrieved");
+        }
+        if (loanType == "PersonalLoanApplication")
+        {
+            //debug
+            System.out.println("PersonalLoanApplication was retrieved");
+        }
+        if (loanType == "RenovationLoanApplication")
+        {
+            //debug
+            System.out.println("RenovationLoanApplication was retrieved");
+        }
+        if (loanType == "ProjectLoanApplication")
+        {
+            //debug
+            System.out.println("ProjectLoanApplication was retrieved");
+        }
+        if (loanType == "BusinessLoanApplication")
+        {
+            //debug
+            System.out.println("BusinessLoanApplication was retrieved");
+        }
+    }
 }
