@@ -31,27 +31,28 @@ public class InvestmentController {
 
     //Enables the user to view the investor screen
     @GetMapping("/InvestorScreen")
-    public String showInvestorScreen(Model model){
-        //Investment investment = new Investment();
-        //model.addAttribute("investment",investment);
+    public String showInvestorScreen(@ModelAttribute("user")User user, Model model) {
+        model.addAttribute("user",user);
         return "InvestorScreen";
     }
 
     //Enables the user to view the investor screen
-    @GetMapping("/InvestmentView")
-    public String showInvestorView( Model model){
-        Investment investment = new Investment();
-        model.addAttribute("investment",investment);
+    @GetMapping("/InvestmentView/{id}")
+    public String showInvestorView(@PathVariable(value = "id") String id, @ModelAttribute("user") User user, Model model) {
+        Investment in = new Investment();
+        model.addAttribute("investment", in);
+        in.setInvestorId(id);
+        user.setUserId(id);
         return "InvestmentView";
     }
 
     @PostMapping("/saveInvestment")
-    public String saveInvestment(@ModelAttribute("investment") Investment investment, Model model){
-        //int credit = Integer.parseInt(loanApplication.getCustomerCredit());
-        //String sId = investment.getInvestorId();
-
-        investmentService.saveInvestment(investment);
-        model.addAttribute("investment",investment);
-        return"redirect:/InvestorScreen";
+    public String saveInvestment(@ModelAttribute("investment") Investment investment, Model model) {
+        {
+            investmentService.saveInvestment(investment);
+            model.addAttribute("investment",investment);
+            String inId = investment.getInvestorId();
+            return "redirect:/InvestmentView/"+inId;
+        }
     }
 }

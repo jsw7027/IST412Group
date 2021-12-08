@@ -50,7 +50,7 @@ public class LoanController {
         List<LoanApplication> all = loanService.getAllLoan();
         List<LoanApplication> myList = new ArrayList<>();
         for(int i=0; i<all.size(); i++){
-            System.out.println(all.get(i).getCustomerId());
+            System.out.println(all.get(i).getId());
             if(all.get(i).getCustomerId().equals(id)){
                 myList.add(all.get(i));
             }
@@ -85,11 +85,18 @@ public class LoanController {
         return"redirect:/showLoanForm/"+sId;
     }
 
+
     //Updates the loan application
     @PostMapping("/updateLoan")
     public String updateLoan(@ModelAttribute("loan") LoanApplication loanApplication){
         loanService.saveLoan(loanApplication);
         return"redirect:/loanList";
+    }
+
+    @PostMapping("/repay")
+    public String reapyLoan(@ModelAttribute("loan") LoanApplication loanApplication){
+        loanService.saveLoan(loanApplication);
+        return"redirect:/myLoan/"+loanApplication.getCustomerId();
     }
 
     //Displays a new loan form
@@ -102,13 +109,19 @@ public class LoanController {
         return "WriteLoan";
     }
 
+    @GetMapping("/repayView/{id}")
+    public String repayView(@PathVariable (value="id") long id,Model model){
+        LoanApplication loanApplication = loanService.getLoanById(id);
+        model.addAttribute("loan", loanApplication);
+        return "RepayLoan";
+    }
+
     //provides a status update view for the loan application
     @GetMapping("/statusUpdateView/{id}")
     public String statusUpdateView(@PathVariable (value="id") long id,Model model){
         LoanApplication loanApplication = loanService.getLoanById(id);
         model.addAttribute("loan", loanApplication);
         return "update_loan";
-
     }
 
 

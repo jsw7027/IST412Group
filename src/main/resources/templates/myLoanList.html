@@ -18,6 +18,7 @@
         <th>Loan Type</th>
         <th>Loan Amount</th>
         <th>Customer Loan Status</th>
+        <th>Repay Link</th>
     </tr>
     </thead>
     <tbody>
@@ -27,6 +28,9 @@
         <td th:text="${loan.loanType}"></td>
         <td th:text="${loan.loanAmount}"></td>
         <td th:text="${loan.status}"></td>
+        <td>
+            <a th:href="@{/repayView/{id}(id=${loan.id})}" class="btn btn-primary">Repayment</a>
+        </td>
     </tr>
     </tr>
     </tbody>
