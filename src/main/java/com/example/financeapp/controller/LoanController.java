@@ -73,6 +73,7 @@ public class LoanController {
     public String saveLoan(@ModelAttribute("loan") LoanApplication loanApplication, Model model){
         int credit = Integer.parseInt(loanApplication.getCustomerCredit());
         String sId = loanApplication.getCustomerId();
+        System.out.println(credit);
         if(credit<5){
             loanApplication.setStatus("denied(lowCredit)");
         }else if(credit<8){
