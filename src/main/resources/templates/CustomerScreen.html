@@ -60,7 +60,7 @@
         <tr th:each="user : ${user}">
         <td th:text="${user.userId}"style="background-color: white; border-radius: 6px"></td>
         <td>
-            <a th:href="@{/showLoanForm/{id}(id=${user.userId})}" class="btn btn-primary">Write Application</a>
+            <a th:href="@{/showLoanForm/{id}(id=${user.userId})}" class="btn btn-primary">Loan Application</a>
             <a th:href="@{/myLoan/{id}(id=${user.userId})}"  class="btn btn-primary">View My Loan</a>
         </td>
     </tr>
