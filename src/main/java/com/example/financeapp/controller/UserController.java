@@ -81,7 +81,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/showInvestorData")
+ /*   @GetMapping("/showInvestorData")
     public String showInvestorData(Model model){
         List<User> userList = userService.getAllUsers();
         ArrayList<User> investors = new ArrayList<User>();
@@ -93,7 +93,7 @@ public class UserController {
         model.addAttribute("investorList", investors);
 
         return "InvestorDataView";
-    }
+    }*/
 
     @GetMapping("/userList")
     public String viewUserPage(Model model) {

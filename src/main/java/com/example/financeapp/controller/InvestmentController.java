@@ -45,6 +45,12 @@ public class InvestmentController {
         return "InvestmentView";
     }
 
+    @GetMapping("/showInvestorData")
+    public String showInvestorData(Model model){
+        model.addAttribute("investorList", investmentService.getAllInvestments());
+        return "InvestorDataView";
+    }
+
     @PostMapping("/saveInvestment")
     public String saveInvestment(@ModelAttribute("investment") Investment investment, Model model){
         //int credit = Integer.parseInt(loanApplication.getCustomerCredit());
