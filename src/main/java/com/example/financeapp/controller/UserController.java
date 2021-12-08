@@ -73,6 +73,8 @@ public class UserController {
         for(int i=0; i<userList.size();i++){
             if(userList.get(i).getUserType().equals("customer")){
                 customers.add(userList.get(i));
+            }else if(userList.get(i).getUserType().equals("Customer")){
+                customers.add(userList.get(i));
             }
         }
         model.addAttribute("customerList", customers);
