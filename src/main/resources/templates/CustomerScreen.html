@@ -1,20 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <style>
+        body {
+            background-image: url('https://wallpaperbat.com/down/219072-4k-tech-wallpaper');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        h2 {text-align: center;}
+        h4 {text-align: left;}
+    </style>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
+    <title>W3.CSS Template</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!-- Navbar (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+            <a href="#customer" class="w3-bar-item w3-button"><b>1st</b> Financial Company</a>
+            <!-- Float links to the right. Hide them on small screens -->
+            <div class="w3-right w3-hide-small">
+                <a href="#projects" class="w3-bar-item w3-button"></a>
+                <a href="#about" class="w3-bar-item w3-button"></a>
+                <a href="http://localhost:8080/" class="w3-bar-item w3-button">Logout</a>
+            </div>
+        </div>
+    </div>
 
 </head>
 <body>
 
-Welcome to our app
+<div class="Welcome">
+    <h1>
+        <b></b>
+    </h1>
+    <h2>
+        <b>Welcome</b>
+    </h2>
+    <p></p>
+</div>
+
+<h2>
+    <b  style='color:white !important; line-height: 50px'>Welcome to Customer Service Area</b>
+</h2>
+<h4>
+    <b  style='color:white !important; line-height: 50px; text-align: left'> User ID: </b>
+</h4>
+
+
 <table border="0" class ="table table-striped table-responsive-md">
 
     <tbody>
     <tr>
         <tr th:each="user : ${user}">
-        <td th:text="${user.userId}"></td>
+        <td th:text="${user.userId}"style="background-color: white; border-radius: 6px"></td>
         <td>
             <a th:href="@{/showLoanForm/{id}(id=${user.userId})}" class="btn btn-primary">Write Application</a>
             <a th:href="@{/myLoan/{id}(id=${user.userId})}"  class="btn btn-primary">View My Loan</a>
@@ -22,6 +66,7 @@ Welcome to our app
     </tr>
     </tr>
     </tbody>
+    </tr>
 </table>
 
 
