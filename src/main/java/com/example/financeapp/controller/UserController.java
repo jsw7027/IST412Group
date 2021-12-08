@@ -80,6 +80,21 @@ public class UserController {
         return "LoaneeDataView";
     }
 
+
+    @GetMapping("/showInvestorData")
+    public String showInvestorData(Model model){
+        List<User> userList = userService.getAllUsers();
+        ArrayList<User> investors = new ArrayList<User>();
+        for(int i=0; i<userList.size();i++){
+            if(userList.get(i).getUserType().equals("Investor")){
+                investors.add(userList.get(i));
+            }
+        }
+        model.addAttribute("investorList", investors);
+
+        return "InvestorDataView";
+    }
+
     @GetMapping("/userList")
     public String viewUserPage(Model model) {
         model.addAttribute("listUser", userService.getAllUsers());
