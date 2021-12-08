@@ -34,9 +34,18 @@
         <button type="submit" class="btn btn-info col-2"> Repay Loan</button>
     </form>
 
+    <form action="#" th:action="@{/myLoan/{id}(id=${loan.customerId})}" th:object="${loan}"
+          method="GET">
+
+        <input type="hidden" th:field="*{customerId}"
+               placeholder="Customer Id" class="form-control mb-4 col-4">
+
+
+        <button type="submit" class="btn btn-info col-2"> Back</button><br>
+    </form>
+
     <hr>
 
-    <a th:href = "@{/loanList}"> Back to Loan Data</a>
 </div>
 </body>
 </html>
