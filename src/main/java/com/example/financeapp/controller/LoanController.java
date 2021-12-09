@@ -72,9 +72,10 @@ public class LoanController {
     @PostMapping("/saveLoan")
     public String saveLoan(@ModelAttribute("loan") LoanApplication loanApplication, Model model){
         int credit = Integer.parseInt(loanApplication.getCustomerCredit());
+        String hOuse = loanApplication.getLoanType();
         String sId = loanApplication.getCustomerId();
         System.out.println(credit);
-        if(credit<5){
+        if(credit<5 || hOuse.equals("HouseLoanApplication")){
             loanApplication.setStatus("denied(lowCredit)");
         }else if(credit<8){
             loanApplication.setStatus("pending(credit need review)");
